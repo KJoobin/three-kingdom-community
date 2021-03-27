@@ -1,6 +1,6 @@
 /* eslint-disable */
 // @ts-ignore
-const desc:string = "S : 강동 소패왕 : 손책 : 패시브 : 자신 : 100% : 전투에서 일반 공격 후 35%의 확률로 목표에게 추가로 맹공(피해율 96%→192%) 발동 및 단일 아군 대상의 병력 회복(치료율 28%→56%, 무력의 영향). 자신이 주장일 때 전투 시작 후 2번째 턴까지 단일 적군 대상이 처음 받는 피해 15%→30% 증가 : 주장 \n" +
+const desc = "S : 강동 소패왕 : 손책 : 패시브 : 자신 : 100% : 전투에서 일반 공격 후 35%의 확률로 목표에게 추가로 맹공(피해율 96%→192%) 발동 및 단일 아군 대상의 병력 회복(치료율 28%→56%, 무력의 영향). 자신이 주장일 때 전투 시작 후 2번째 턴까지 단일 적군 대상이 처음 받는 피해 15%→30% 증가 : 주장 \n" +
   "\n" +
   "S : 강직한 마음 : 하후돈 : 패시브 : 적군 다수(2명) : 100% : 전투 중 자신의 통솔 19→38 증가, 무기 피해를 입으면 40%의 확률로 적군 다수 대상(2명)에게 무기 피해(피해율 42%→84%)\n" +
   "\n" +
@@ -361,22 +361,22 @@ const data = desc
     const { length } = el;
     const dataInterpreter = el.map((item, idx) => {
       if (idx === 0) {
-        return { rank: item };
+        return { rank: item.trim() };
       }
       if (idx === 1) {
-        return { skillName: item };
+        return { skillName: item.trim() };
       }
       if (idx === 2 ) {
-        return { warLords: item.split(",") };
+        return { warLords: item.trim().split(",") };
       }
       if (idx === 3) {
-        return { type: item };
+        return { type: item.trim() };
       }
       if ( idx === 4) {
-        return { target: item };
+        return { target: item.trim() };
       }
       if ( idx === 5) {
-        return { percentage: item };
+        return { percentage: item.trim() };
       }
       if (idx === 6) {
         return { desc: item };
