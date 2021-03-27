@@ -7,7 +7,8 @@ import axios from "axios";
 import { useRouter } from "next/router";
 
 // https://developer.mozilla.org/ko/docs/Web/API/AbortController/abort
-const controller = new AbortController();
+// TODO: fix build error
+// const controller = new AbortController();
 
 export default function SearchWarlords() {
   const route = useRouter();
@@ -27,7 +28,6 @@ export default function SearchWarlords() {
         clearTimeout(timeoutId.current);
       }
       timeoutId.current = setTimeout(() => {
-        controller.abort();
         axios.get(`/api/skill?q=${temp}`).then((res) => {
           setResult(res.data);
         });
