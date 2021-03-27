@@ -1,4 +1,4 @@
-import { Box, Container } from "@component/atoms";
+import { Box, Container, Image, Text } from "@component/atoms";
 import Head from "next/head";
 import Link from "next/link";
 
@@ -13,23 +13,14 @@ export default function Home() {
       </Head>
 
       <main>
-        <Container maxWidth={"sm"}>
+        <Container>
           <Box>
-            모바일 삼국지~
+            <Image src={"./images/main-image.png"} width={"auto"} height={"auto"}/>
           </Box>
         </Container>
       </main>
 
-      <footer>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{" "}
-          <img src="/vercel.svg" alt="Vercel Logo" />
-        </a>
-      </footer>
+      
     </div>
   );
 }
