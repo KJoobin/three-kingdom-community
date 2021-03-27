@@ -62,6 +62,6 @@ export default (req:NextApiRequest, res:NextApiResponse) => {
       return 1;
     });
 
-  res.status(200).json({ data: result.map(el => el.data) });
+  res.status(200).json( result.map(el => el.data));
 
 };

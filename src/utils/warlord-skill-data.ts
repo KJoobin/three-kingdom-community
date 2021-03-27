@@ -7,7 +7,6 @@ export const warlordSkillData = [
     target: "자신",
     percentage: "100%",
     desc: " 전투에서 일반 공격 후 35%의 확률로 목표에게 추가로 맹공(피해율 96%→192%) 발동 및 단일 아군 대상의 병력 회복(치료율 28%→56%, 무력의 영향). 자신이 주장일 때 전투 시작 후 2번째 턴까지 단일 적군 대상이 처음 받는 피해 15%→30% 증가 ",
-    hasCaptainImpact: true,
   },
   {
     rank: "S",
@@ -26,7 +25,6 @@ export const warlordSkillData = [
     target: "자신",
     percentage: "100%",
     desc: " 전투 중 자신의 회심 확률 25%→50%(발동 시 무기 피해 100% 증가) 및 회심 피해 10%→20% 증가. 자신이 주장일 때 우군 다수 대상(2명)의 회심 확률 2.5%→5%와 회심 피해 5%→10% 증가 ",
-    hasCaptainImpact: true,
   },
   {
     rank: "S",
@@ -36,7 +34,6 @@ export const warlordSkillData = [
     target: "적군 다수(3명)",
     percentage: "100%",
     desc: " 전투 중 매 턴 행동 시 14%→28%의 확률로 적군 전체에게 무기 피해 부여(피해율 53%→106%), 효력이 없으면 발동률 10% 증가 및 자신이 7회 일반 공격을 받은 후 1탄 동안 허약 상태(피해 줄기 불가) 획득 및 발동률 리셋. 자신이 주장이면 발동률 초기화 확률이 17.5%→35%까지 증가 ",
-    hasCaptainImpact: true,
   },
   {
     rank: "S",
@@ -46,7 +43,6 @@ export const warlordSkillData = [
     target: "자신",
     percentage: "100%",
     desc: " 전투 중 자신이 통찰 상태(모든 제어 효과 면역) 획득, 무력, 지력, 속도, 통솔, 20→40 증가. 자신이 주장일 때 25→50 증가 ",
-    hasCaptainImpact: true,
   },
   {
     rank: "S",
@@ -92,7 +88,6 @@ export const warlordSkillData = [
     target: "적군 다수(3명)",
     percentage: "100%",
     desc: " 전투 중 액티브 전법을 발동할 때마다 40%→80%의 확률로 적군 전체에게 책략 공격(피해율 34%→68%, 지력의 영향). 자신이 주장일 때 해당 공격이 20%→40%의 확률로 목표에게 연소 상태 부여(피해율 34%, 지력의 영향), 1턴 지속 ",
-    hasCaptainImpact: true,
   },
   {
     rank: "S",
@@ -102,7 +97,6 @@ export const warlordSkillData = [
     target: "적군 다수(3명)",
     percentage: "100%",
     desc: " 전투 시작 후 2,4번째 턴에 적군 전체에게 무기 공격(피해율 52%→104%), 목표가 무장 해제 상태이면 추가로 목표의 통솔 25%→50% 감소, 2턴 지속. 자신이 주장일 때 통솔 감소 효과가 허망 상태의 목표에게도 추가 ",
-    hasCaptainImpact: true,
   },
   {
     rank: "S",
@@ -139,7 +133,6 @@ export const warlordSkillData = [
     target: "자신",
     percentage: "100%",
     desc: " 전투 중 턴마다 자신의 병력 감소(1%X턴 수), 또한 턴마다 배반(무기 피해를 줄 때 자신의 피해량을 기준으로 일정한 병력 회복) 4%→8% 및 무력 15 회복. 자신이 주장이면 5번째 턴부터 아군 부장이 살아있으면 턴마다 적군과 아군 전체에게 무기 피해(피해율30%→60%) ",
-    hasCaptainImpact: true,
   },
   {
     rank: "S",
@@ -149,7 +142,6 @@ export const warlordSkillData = [
     target: "자신",
     percentage: "100%",
     desc: " 피해를 받을 때 20%→35% 확률로 자신의 디버프를 정화하며, 랜덤 단일 적군 대상이 공포 상태에 들어가게 하고(이동 불가), 1턴이 지속됩니다. 이 효과는 매 턴에 최대 한 번을 촉발할 수 있습니다. ",
-    hasCaptainImpact: true,
   },
   {
     rank: "S",
@@ -168,7 +160,6 @@ export const warlordSkillData = [
     target: "자신",
     percentage: "100%",
     desc: " 전투 중 자신의 무력 17→34 및 범위 공격(일반 공격 시 목표와 같은 부대의 다른 장수에게 피해 부여)효과 27%→54% 획득. 자신이 주장이면 범위 공격치 30%→60% ",
-    hasCaptainImpact: true,
   },
   {
     rank: "S",
@@ -250,7 +241,6 @@ export const warlordSkillData = [
     target: "자신",
     percentage: "100%",
     desc: " 전투 시작 후 2번째 턴까지 자신이 주장이면 랜덤의 부장이 자신의 피해 20%→40% 분담, 3번째 턴부터 자신이 행동 시 디버프가 있으면 25%→50% 확률로 전투 종료 때까지 반격 상태 획득(피해율 150%) ",
-    hasCaptainImpact: true,
   },
   {
     rank: "S",
@@ -260,7 +250,6 @@ export const warlordSkillData = [
     target: "아군 다수(3명)",
     percentage: "100%",
     desc: " 전투 중 우군 다수 대상(2명)이 주는 피해 8%→16% 증가(지력의 영향), 자신이 받는 피해 9%→18% 감소(지력의 영향). 자신이 주장이면 부장이 피해를 줄 때 해당 피해량의 10% 만큼 병력 회복 ",
-    hasCaptainImpact: true,
   },
   {
     rank: "S",
@@ -288,7 +277,6 @@ export const warlordSkillData = [
     target: "아군 다수(2명)",
     percentage: "100%",
     desc: " 턴마다 아군 다수를 치료(2명, 치료율 34%→68%, 지력의 영향)하고 5%→10%의 확률로 적군 단일 대상에게 허약 상태(피해 주기 불가)부여, 1턴 지속. 자신이 주장이면 허약 상태의 부여 확률이 12.5%→25%까지 증가 ",
-    hasCaptainImpact: true,
   },
   {
     rank: "S",
@@ -307,7 +295,6 @@ export const warlordSkillData = [
     target: "적군 다수(2명)",
     percentage: "100%",
     desc: " 적군 다수 대상(2명)이 액티브 전법 발동 시 25%→35%의 확률로 패배 및 대상에게 책략 피해 부여(피해율100%, 지력의 영향). 자신이 주장이면 해당 피해가 양측의 지력의 차에 따라 추가로 증가 ",
-    hasCaptainImpact: true,
   },
   {
     rank: "S",
@@ -353,7 +340,6 @@ export const warlordSkillData = [
     target: "자신",
     percentage: "100%",
     desc: " 전투 중 자신과 우군의 단일 대상이 일반 공격을 발동하면 자신이 37.5%→75%의 확률로 연격, 통찰, 선공, 필중, 적진 격파 상태 중 1개를 랜덤 획득, 2턴 지속.자신이 주장이면 우선적으로 다른 상태 획득 ",
-    hasCaptainImpact: true,
   },
   {
     rank: "S",
@@ -390,7 +376,6 @@ export const warlordSkillData = [
     target: "적군 다수(1~2명)",
     percentage: "25%→40%",
     desc: " 1턴 준비 후 적군 다수 대상(1~2명)에게 혼란 상태 부여(전법과 관계없이 목표 선택해 공격) 및 50%의 확률로 아군 다수 대상(2명)이 받는 피해 8%→16% 감소, 2턴 지속, 자신이 여성이면 반드시 적군의 다수 대상(2명)선택 ",
-    hasCaptainImpact: true,
   },
   {
     rank: "S",
@@ -454,7 +439,6 @@ export const warlordSkillData = [
     target: "적군 다수(3명)",
     percentage: "35%",
     desc: " 1턴 준비 후 적군 전체에게 맹공(피해율 73%→146%)및 대상에게 랜덤으로 무장 해제(일반 공격 불가) 또는 허망(액티브 전법 발동 불가) 부여, 1턴 지속. 자신이 주장일 때 추가로 자신이 주는 무기 피해 18%→36% 증가, 2턴 지속 ",
-    hasCaptainImpact: true,
   },
   {
     rank: "S",
@@ -545,7 +529,6 @@ export const warlordSkillData = [
     target: "적군 다수(2~3명)",
     percentage: "35%",
     desc: " 단일 적군 대상 및 추가로 적군 1~2명에게 무기 공격(피해율 59%→118%), 자신의 액티브 전법 발동률 5%→10% 증가(자신이 주장일 때 발동률 7.5%→15%까지 증가), 2턴 지속, 단일 대상의 목표가 적군 주장이면 대산에게 모반 상태 부여, 턴마다 지속 피해(피해율 51%→102%, 무력 또는 지력 중 높은 항목의 영향을 받고 방어 무시), 2턴 지속 ",
-    hasCaptainImpact: true,
   },
   {
     rank: "S",
@@ -609,7 +592,6 @@ export const warlordSkillData = [
     target: "적군 다수(2명)",
     percentage: "50%",
     desc: " 1턴 준비 후 적군 다수 대상(2명)에게 무기 공격 1회(피해율 63%→126%), 대상의 통솔 12→24 감소(무력의 영향) 및 연소 상태를 부여하여 턴마다 지속 피해(피해율30%→60%, 지력의 영향), 2턴 지속. 자신이 주장이면 추가로 아군 전체의 통솔 40→80% 증가, 3턴 지속 ",
-    hasCaptainImpact: true,
   },
   {
     rank: "S",
@@ -673,7 +655,6 @@ export const warlordSkillData = [
     target: "단일 적군",
     percentage: "25%→35%",
     desc: " 단일 적군 대상에게 결투를 요청하여 양측이 순서대로 상대방에게 일반공격 3회 가함, 자신이 우선 공격 진행. 결투 중 양측은 무장 해제와 공포 상태에 영향을 받지 않고 범위 공격과 돌격 전법 발동 가능. 자신이 주장이면 결투 후 자신이 받는 무기 피해 3.5%→7% 감소(무력의 영향), 2턴 지속 ",
-    hasCaptainImpact: true,
   },
   {
     rank: "S",
@@ -692,7 +673,6 @@ export const warlordSkillData = [
     target: "적군 다수(3명)",
     percentage: "45%",
     desc: " 1턴 준비 후 적군 랜덤 단일 대상에게 책략 공격(피해율 51%→102%, 지력의 영향), 총5회 발동하며 매번 별도로 목표 선택. 목표가 수공상태이면 30%확률로 공토 상태 부여(행동 불가), 1턴 지속. 자신이 주장이면 공포의 확률 50%증가 및 모래폭풍 상태에 유효 ",
-    hasCaptainImpact: true,
   },
   {
     rank: "S",
@@ -747,7 +727,6 @@ export const warlordSkillData = [
     target: "단일 적군",
     percentage: "50%",
     desc: " 단일 적군 대상에게 연소 상태(피해율 41%→82%, 지력의 영향) 부여, 3턴 지속, 랜덤으로 2회 부여. 만약 이미 연소 상태의 목표일 경우 적군 전체에 책략 공격(31%→62%, 지력의 영향, 자신을 주장으로 할 때, 피해율이 49%→98%까지 증가), 또한 30% 확률로 연소 상태의 적군에 위협 상태 부여, 1턴 지속, 이후 또다른 적군에게 연소 상태 부여 ",
-    hasCaptainImpact: true,
   },
   {
     rank: "S",
@@ -865,7 +844,6 @@ export const warlordSkillData = [
     target: "적군 다수(3명)",
     percentage: "30%",
     desc: " 일반 공격 후 적군 전체에게 무기 공격1회(피해율 36%→72%). 자신이 주장이면 해당 무기 공격이 더욱 강력하게 변화(피해 율54%→108%) ",
-    hasCaptainImpact: true,
   },
   {
     rank: "S",
@@ -1584,5 +1562,6 @@ export const warlordSkillData = [
     target: "100%",
     percentage: "장수를 군량관으로 임명하면 식량 둔전 수익 1.5%→3% 증가",
   },
-];
+]
+;
 

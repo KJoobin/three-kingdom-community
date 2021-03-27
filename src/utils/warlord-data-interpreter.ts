@@ -356,7 +356,6 @@ const data = desc
   .filter(el => el.startsWith("S") || el.startsWith("A"))
   .map(el => el.split(":"))
   .map((el) => {
-    const { length } = el;
     const dataInterpreter = el.map((item, idx) => {
       if (idx === 0) {
         return { rank: item.trim() };
@@ -379,10 +378,6 @@ const data = desc
       if (idx === 6) {
         return { desc: item };
       }
-      if (idx === 7) {
-        return { hasCaptainImpact: true };
-      }
-      return item;
     });
 
     return Object.assign({}, ...dataInterpreter);
