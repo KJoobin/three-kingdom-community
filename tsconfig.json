@@ -27,6 +27,9 @@
       ],
       "@component/*": [
         "src/components/*"
+      ],
+      "@utils/*": [
+        "src/utils/*"
       ]
     }
   },
