@@ -1,11 +1,14 @@
 import Head from "next/head";
+import Link from "next/link";
 
 export default function Home() {
   return (
     <div>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+
       <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
+        <title>모바일 삼국지 전략판 유틸 기능</title>
       </Head>
 
       <main>

@@ -20,11 +20,6 @@ module.exports = {
             "./tsconfig.json",
         ],
     },
-    settings: {
-        "import/resolver": {
-            "babel-module": {},
-        },
-    },
     rules: {
         // eslint rules
         "max-len": [
