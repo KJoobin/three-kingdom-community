@@ -17,10 +17,15 @@ export default function Home() {
           <Box>
             <Image src={"./images/main-image.png"} width={"auto"} height={"auto"}/>
           </Box>
+          <Box py={1}>
+            <Link href={"search/skill"}>
+              전법 검색
+            </Link>
+          </Box>
         </Container>
       </main>
 
-      
+
     </div>
   );
 }
