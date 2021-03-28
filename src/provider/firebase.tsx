@@ -1,10 +1,7 @@
 import React from "react";
 
-import firebase from "firebase/app";
-
-import "firebase/analytics";
-
 export const FirebaseProvider:React.FunctionComponent = ({ children }) => {
+  const firebase = require("firebase/app");
   const firebaseConfig = {
     apiKey: "AIzaSyA-WsJd-d3Xopk0d8MKvT8A5RHwl_lFu7w",
     authDomain: "three-kingdoms-517f2.firebaseapp.com",

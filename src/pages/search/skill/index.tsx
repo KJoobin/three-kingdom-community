@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Box, Container, Text } from "@component/atoms";
 import { InputFieldText } from "@component/molecules";
 import { warlordSkillData } from "@utils/warlord-skill-data";
+
 import axios from "axios";
 import { useRouter } from "next/router";
 

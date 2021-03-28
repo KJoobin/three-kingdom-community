@@ -1,5 +1,4 @@
-import { Box, Container, Image, Text } from "@component/atoms";
-import Head from "next/head";
+import { Box, Container, Image } from "@component/atoms";
 import Link from "next/link";
 
 export default function Home() {
