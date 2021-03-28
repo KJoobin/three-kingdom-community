@@ -16,7 +16,8 @@ export default function SearchWarlords() {
   const timeoutId = useRef<any>();
 
   const [temp, setTemp] = useState<string>("");
-  const [result, setResult] = useState<typeof warlordSkillData>();
+  const [result, setResult] = useState<typeof warlordSkillData>([]);
+  const [error, setError] = useState<string>();
 
   const onChangeText = (e:React.ChangeEvent<HTMLInputElement>) => {
     setTemp(e.target.value);
@@ -29,7 +30,10 @@ export default function SearchWarlords() {
       }
       timeoutId.current = setTimeout(() => {
         axios.get(`/api/skill?q=${temp}`).then((res) => {
+          setError("");
           setResult(res.data);
+        }).catch((error) => {
+          setError(error.message);
         });
       }, 300);
     }
@@ -64,33 +68,37 @@ export default function SearchWarlords() {
         <Box mb={2}>
           <Text variant={"h5"}>RESULT</Text>
         </Box>
-        {result
-          ? result.map((el) => {
-            return <Box mb={3}>
-              <Text variant={"body1"}>
+        {error
+          ? <Box>
+            <Text variant={"body1"}>{error}</Text>
+          </Box>
+          : result.length > 0
+            ? result.map((el, idx) => {
+              return <Box key={idx} mb={3}>
+                <Text variant={"body1"}>
               등급: {el.rank}
-              </Text>
-              <Text variant={"body1"}>
+                </Text>
+                <Text variant={"body1"}>
               스킬 이름: {el.skillName}
-              </Text>
-              <Text variant={"body1"}>
+                </Text>
+                <Text variant={"body1"}>
               전법 전승 장수: {el.warLords.join(", ")}
-              </Text>
-              <Text variant={"body1"}>
+                </Text>
+                <Text variant={"body1"}>
               스킬 타입: {el.type}
-              </Text>
-              <Text variant={"body1"}>
+                </Text>
+                <Text variant={"body1"}>
               타겟: {el.target}
-              </Text>
-              <Text variant={"body1"}>
+                </Text>
+                <Text variant={"body1"}>
               발동 확률: {el.percentage}
-              </Text>
-              <Text variant={"body1"}>
+                </Text>
+                <Text variant={"body1"}>
               설명: {el.desc}
-              </Text>
-            </Box>;
-          })
-          : (<Text variant={"subtitle1"}>NO RESULT</Text>)
+                </Text>
+              </Box>;
+            })
+            : (<Text variant={"subtitle1"}>NO RESULT</Text>)
         }
       </Box>
     </Container>
