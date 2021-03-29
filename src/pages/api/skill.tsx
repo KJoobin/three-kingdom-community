@@ -1,9 +1,12 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
+import { PrismaClient } from "@prisma/client";
 import { NextApiRequest, NextApiResponse } from "next";
 
 import { warlordSkillData } from "../../utils/warlord-skill-data";
 
-export default (req:NextApiRequest, res:NextApiResponse) => {
+const Prisma = new PrismaClient();
+
+export default async (req:NextApiRequest, res:NextApiResponse) => {
   const { q } = req.query;
   if (!q || Array.isArray(q)) {
     res.status(404).json("not found");
@@ -35,6 +38,10 @@ export default (req:NextApiRequest, res:NextApiResponse) => {
       }
     }
   }
+
+  const skill = await Prisma.skill.findMany();
+
+  console.log({ skill });
 
   const result = warlordSkillData.map((warlordData) => {
     let count = 0;

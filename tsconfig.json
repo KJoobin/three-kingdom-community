@@ -31,7 +31,8 @@
       "@utils/*": [
         "src/utils/*"
       ]
-    }
+    },
+    "sourceMap": true,
   },
   "include": [
     "next-env.d.ts",
