@@ -16,10 +16,13 @@ model SkillType {
 
 model Skill {
   id          Int       @id @default(autoincrement())
-  createdAt   DateTime  @default(now())
   name        String    @unique
-  typeId      SkillType @relation(fields: [skillTypeId], references: [id])
   desc        String
   picture     String?
+  rank        String
+  target      String
+  percentage  Int
   skillTypeId Int
+  Type      SkillType @relation(fields: [skillTypeId], references: [id])
+  createdAt   DateTime  @default(now())
 }
