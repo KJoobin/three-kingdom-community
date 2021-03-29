@@ -4,14 +4,22 @@ datasource db {
 }
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["createMany"]
 }
 
+model SkillType {
+  id    Int     @id @default(autoincrement())
+  name  String
+  Skill Skill[]
+}
 
 model Skill {
-  id    Int     @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  name String @unique
-  desc String
-  picture String?
+  id          Int       @id @default(autoincrement())
+  createdAt   DateTime  @default(now())
+  name        String    @unique
+  typeId      SkillType @relation(fields: [skillTypeId], references: [id])
+  desc        String
+  picture     String?
+  skillTypeId Int
 }

@@ -40,8 +40,9 @@ export default async (req:NextApiRequest, res:NextApiResponse) => {
   }
 
   const skill = await Prisma.skill.findMany();
+  const type = await Prisma.skillType.findMany();
 
-  console.log({ skill });
+  console.log({ skill, type });
 
   const result = warlordSkillData.map((warlordData) => {
     let count = 0;

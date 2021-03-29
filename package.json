@@ -5,7 +5,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "prisma-generate": "prisma format && prisma generate",
+    "prisma-migrate": "prisma migrate dev --name"
   },
   "dependencies": {
     "@material-ui/core": "^4.11.3",
