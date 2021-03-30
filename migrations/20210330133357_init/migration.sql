@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE `Skill` MODIFY `desc` LONGTEXT NOT NULL;
