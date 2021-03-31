@@ -1,5 +1,8 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import { PrismaClient } from "@prisma/client";
+import skillDummy from "@utils/dummy/skillDummy";
+import skillTypeDummy from "@utils/dummy/skillTypeDummy";
+import warlordDummy from "@utils/dummy/warlordDummy";
 import { NextApiRequest, NextApiResponse } from "next";
 
 import { warlordSkillData } from "../../utils/warlord-skill-data";
@@ -7,6 +10,10 @@ import { warlordSkillData } from "../../utils/warlord-skill-data";
 const Prisma = new PrismaClient();
 
 export default async (req:NextApiRequest, res:NextApiResponse) => {
+  // await skillTypeDummy();
+  // await skillDummy();
+  // await warlordDummy();
+
   const { q } = req.query;
   if (!q || Array.isArray(q)) {
     res.status(404).json("not found");
@@ -41,35 +48,36 @@ export default async (req:NextApiRequest, res:NextApiResponse) => {
 
   const skill = await Prisma.skill.findMany();
   const type = await Prisma.skillType.findMany();
+  const warlord = await Prisma.warlord.findMany();
 
-  console.log({ skill, type });
+  console.log({ skill, type, warlord });
 
-  const result = warlordSkillData.map((warlordData) => {
-    let count = 0;
-    queryItems.forEach((searchQ) => {
-      Object.entries(warlordData).find(([key, data]) => {
-        if (typeof data === "string") {
-          return data.includes(searchQ);
-        }
-        if (Array.isArray(data)) {
-          return !!data.find(warlord => warlord === searchQ);
-        }
-        return false;
-      }) && count++;
-    });
-    return { data: warlordData, count };
+  // const result = warlordSkillData.map((warlordData) => {
+  //   let count = 0;
+  //   queryItems.forEach((searchQ) => {
+  //     Object.entries(warlordData).find(([key, data]) => {
+  //       if (typeof data === "string") {
+  //         return data.includes(searchQ);
+  //       }
+  //       if (Array.isArray(data)) {
+  //         return !!data.find(warlord => warlord === searchQ);
+  //       }
+  //       return false;
+  //     }) && count++;
+  //   });
+  //   return { data: warlordData, count };
+  //
+  // }).filter(el => el.count > 0)
+  //   .sort((a, b) => {
+  //     if (a.count > b.count) {
+  //       return -1;
+  //     }
+  //     if (a.count === b.count) {
+  //       return 0;
+  //     }
+  //     return 1;
+  //   });
 
-  }).filter(el => el.count > 0)
-    .sort((a, b) => {
-      if (a.count > b.count) {
-        return -1;
-      }
-      if (a.count === b.count) {
-        return 0;
-      }
-      return 1;
-    });
-
-  res.status(200).json( result.map(el => el.data));
+  res.status(200);
 
 };
