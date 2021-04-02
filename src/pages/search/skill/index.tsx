@@ -1,9 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 
 import { BoldText, Box, Container, Text, TextProps } from "@component/atoms";
-import {Card, PointerCard} from "@component/atoms/card";
+import { Card, PointerCard } from "@component/atoms/card";
 import { InputFieldText } from "@component/molecules";
 import axios from "axios";
+import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
 // https://developer.mozilla.org/ko/docs/Web/API/AbortController/abort
@@ -88,59 +89,64 @@ export default function SearchWarlords() {
   }, [route.query.q]);
 
   return (
-    <Container>
-      <Box>
-        <Text>
+    <>
+      <Head>
+        <title>모바일 삼국지 전략판 유틸 기능</title>
+        <desc>장수 검색, 전법 검색, 장수 스킬 검색 기능</desc>
+      </Head>
+      <Container>
+        <Box>
+          <Text>
         Search Warlords
-        </Text>
-
-      </Box>
-      <Box p={1}>
-        <InputFieldText
-          required
-          fullWidth
-          label={"장수 이름 또는 전법 이름"}
-          InputLabelProps={{ shrink: true }}
-          value={temp}
-          onChange={onChangeText}
-        />
-      </Box>
-      <Box>
-        <Box mb={2}>
-          <Text variant={"h5"}>RESULT</Text>
+          </Text>
         </Box>
-        {error
-          ? <Box>
-            <Text variant={"body1"}>{error}</Text>
+        <Box p={1}>
+          <InputFieldText
+            required
+            fullWidth
+            label={"장수 이름 또는 전법 이름"}
+            InputLabelProps={{ shrink: true }}
+            value={temp}
+            onChange={onChangeText}
+          />
+        </Box>
+        <Box>
+          <Box mb={2}>
+            <Text variant={"h5"}>RESULT</Text>
           </Box>
-          : result.length > 0
-            ? result.map((el, idx) => {
-              return (
-                <Link href={`/warlord/${el.name}`}>
-                  <Box mb={3}>
-                    <PointerCard key={idx} style={{ cursor: "pointer" }}>
-                      <Box p={2} bgcolor={"white"}>
-                        <BoldText variant={"h5"}>
+          {error
+            ? <Box>
+              <Text variant={"body1"}>{error}</Text>
+            </Box>
+            : result.length > 0
+              ? result.map((el, idx) => {
+                return (
+                  <Link href={`/warlord/${el.name}`}>
+                    <Box mb={3}>
+                      <PointerCard key={idx} style={{ cursor: "pointer" }}>
+                        <Box p={2} bgcolor={"white"}>
+                          <BoldText variant={"h5"}>
                           장수 이름: {el.name}
-                        </BoldText>
-                        <BoldText variant={"body1"}>
+                          </BoldText>
+                          <BoldText variant={"body1"}>
                           등급: {el.rank}
-                        </BoldText>
-                        <BoldText variant={"body1"}>
+                          </BoldText>
+                          <BoldText variant={"body1"}>
                           스킬 이름: {el.skill.name}
-                        </BoldText>
-                        <BoldText variant={"body1"}>
+                          </BoldText>
+                          <BoldText variant={"body1"}>
                           전법 전승 스킬 이름: {el.givenSkill.name}
-                        </BoldText>
-                      </Box>
-                    </PointerCard>
-                  </Box>
-                </Link>
-              );
-            })
-            : (<Text variant={"subtitle1"}>NO RESULT</Text>)
-        }
-      </Box>
-    </Container>
+                          </BoldText>
+                        </Box>
+                      </PointerCard>
+                    </Box>
+                  </Link>
+                );
+              })
+              : (<Text variant={"subtitle1"}>NO RESULT</Text>)
+          }
+        </Box>
+      </Container>
+    </>
   );
 }
