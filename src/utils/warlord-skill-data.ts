@@ -541,12 +541,6 @@ export const warlordSkillData:{rank:string; name:string; skill: string; givenSki
   },
   {
     rank: "A",
-    name: "서성",
-    skill: "백동성강",
-    givenSkill: "백동성강",
-  },
-  {
-    rank: "A",
     name: "유봉",
     givenSkill: "진퇴양난",
     skill: "진퇴양난",

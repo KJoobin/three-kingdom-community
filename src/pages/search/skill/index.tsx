@@ -2,8 +2,6 @@ import React, { useEffect, useRef, useState } from "react";
 
 import { Box, Container, Text } from "@component/atoms";
 import { InputFieldText } from "@component/molecules";
-import { warlordSkillData } from "@utils/warlord-skill-data";
-
 import axios from "axios";
 import { useRouter } from "next/router";
 
@@ -11,13 +9,54 @@ import { useRouter } from "next/router";
 // TODO: fix build error
 // const controller = new AbortController();
 
+type SkillType = {
+  id :number;
+  name :string;
+  Skill :Skill[];
+}
+
+type Skill = {
+  id :number;
+  name :string;
+  desc :string;
+  picture? :string;
+  rank :string;
+  target :string;
+  percentage :number;
+
+  skillTypeId :number;
+  Type :SkillType;
+
+  warlord :Warlord[];
+  givenWarlord :Warlord[];
+
+  createdAt :string;
+}
+
+type Warlord = {
+  id : number;
+  name :string;
+  picture? :string;
+  rank :string;
+
+  skillId :number;
+  skill :Skill;
+
+  givenSkillId :number;
+  givenSkill :Skill;
+
+  createdAt :string;
+}
+
+type Result = Warlord;
+
 export default function SearchWarlords() {
   const route = useRouter();
 
   const timeoutId = useRef<any>();
 
   const [temp, setTemp] = useState<string>("");
-  const [result, setResult] = useState<typeof warlordSkillData>([]);
+  const [result, setResult] = useState<Result[]>([]);
   const [error, setError] = useState<string>();
 
   const onChangeText = (e:React.ChangeEvent<HTMLInputElement>) => {
@@ -32,6 +71,7 @@ export default function SearchWarlords() {
       timeoutId.current = setTimeout(() => {
         axios.get(`/api/skill?q=${temp}`).then((res) => {
           setError("");
+          console.log(res.data);
           setResult(res.data);
         }).catch((error) => {
           setError(error.message);
@@ -77,25 +117,16 @@ export default function SearchWarlords() {
             ? result.map((el, idx) => {
               return <Box key={idx} mb={3}>
                 <Text variant={"body1"}>
-              등급: {el.rank}
+                  장수 이름: {el.name}
                 </Text>
                 <Text variant={"body1"}>
-              스킬 이름: {el.skillName}
+                  등급: {el.rank}
                 </Text>
                 <Text variant={"body1"}>
-              전법 전승 장수: {el.warLords.join(", ")}
+                  스킬 이름: {el.skill.name}
                 </Text>
                 <Text variant={"body1"}>
-              스킬 타입: {el.type}
-                </Text>
-                <Text variant={"body1"}>
-              타겟: {el.target}
-                </Text>
-                <Text variant={"body1"}>
-              발동 확률: {el.percentage}
-                </Text>
-                <Text variant={"body1"}>
-              설명: {el.desc}
+                  전법 전승 스킬 이름: {el.givenSkill.name}
                 </Text>
               </Box>;
             })

@@ -5,8 +5,6 @@ import skillTypeDummy from "@utils/dummy/skillTypeDummy";
 import warlordDummy from "@utils/dummy/warlordDummy";
 import { NextApiRequest, NextApiResponse } from "next";
 
-import { warlordSkillData } from "../../utils/warlord-skill-data";
-
 const Prisma = new PrismaClient();
 
 export default async (req:NextApiRequest, res:NextApiResponse) => {
@@ -46,11 +44,48 @@ export default async (req:NextApiRequest, res:NextApiResponse) => {
     }
   }
 
-  const skill = await Prisma.skill.findMany();
-  const type = await Prisma.skillType.findMany();
-  const warlord = await Prisma.warlord.findMany();
+  const or: ({name: {contains: string}} | {skill: {name: {contains: string}}} | {givenSkill: {name: {contains: string}}})[] = [];
+  queryItems.forEach((query) => {
+    or.push(
+      { name: {
+        contains: query,
+      }},
+      { skill: {
+        name: {
+          contains: query,
+        },
+      }},
+      { givenSkill: {
+        name: {
+          contains: query,
+        },
+      }}
+    );
+  });
 
-  console.log({ skill, type, warlord });
+  const result = await Prisma.warlord.findMany({
+    where: {
+      OR: or,
+    },
+    include: {
+      skill: {
+        include: {
+          Type: true,
+        },
+      },
+      givenSkill: {
+        include: {
+          Type: true,
+        },
+      },
+    },
+  });
+
+  // const skill = await Prisma.skill.findMany();
+  // const type = await Prisma.skillType.findMany();
+  // const warlord = await Prisma.warlord.findMany();
+
+  console.log({ result });
 
   // const result = warlordSkillData.map((warlordData) => {
   //   let count = 0;
@@ -78,6 +113,6 @@ export default async (req:NextApiRequest, res:NextApiResponse) => {
   //     return 1;
   //   });
 
-  res.status(200);
+  res.status(200).json(result);
 
 };
