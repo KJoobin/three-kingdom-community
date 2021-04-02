@@ -31,7 +31,7 @@ export default function Home() {
           <footer>
             <Box p={1}>
               <Text>
-          마지막 업데이트 : 2021년 4월 2일 16:09
+          마지막 업데이트 : 2021년 4월 2일 16:49
               </Text>
             </Box>
           </footer>
