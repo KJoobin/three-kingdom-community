@@ -93,6 +93,8 @@ export default function SearchWarlords() {
       <Head>
         <title>모바일 삼국지 전략판 유틸 기능</title>
         <desc>장수 검색, 전법 검색, 장수 스킬 검색 기능</desc>
+        <meta itemProp="name" content="삼국지 전략판 장수, 스킬, 전법스킬 검색"/>
+        <meta itemProp="description" content="장수 검색, 전법 검색, 장수 스킬 검색 기능"/>
       </Head>
       <Container>
         <Box>

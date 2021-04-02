@@ -7,6 +7,8 @@ export default function Home() {
     <>
       <Head>
         <title>모바일 삼국지 전략판 유틸 기능</title>
+        <meta itemProp="name" content="삼국지 전략판"/>
+        <meta itemProp="description" content="삼국지 전략판 에 필요한 장수검색, 스킬 검색, 전법 전승 검색 컨텐츠"/>
         <script data-ad-client="ca-pub-3235703528769525" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
         <meta name="google-site-verification" content="BpKt2jxZjZiGovOmRQWQIWPtaejyVNROK2U0Q7cH2h0" />
       </Head>
