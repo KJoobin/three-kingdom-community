@@ -21,20 +21,17 @@ const Prisma = new PrismaClient();
 
 export default async () => {
   for (const { type, ...workloadSkill } of skillData) {
-    console.log({ type });
     const skillType = await Prisma.skillType.findFirst({ where: {
       name: type,
     }});
     if (skillType) {
       const skillTypeId = skillType.id;
-      console.log({ skillTypeId });
       const create = await Prisma.skill.create({
         data: {
           ...workloadSkill,
           skillTypeId,
         },
       });
-      console.log({ create });
     }
   }
 };

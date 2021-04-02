@@ -1,5 +1,6 @@
-import {DefaultTheme} from "styled-components"
+import { DefaultTheme } from "styled-components";
 
 const theme:DefaultTheme = {
   borderRadius: "4px",
-}
+  divider: "#eeeeee"
+};

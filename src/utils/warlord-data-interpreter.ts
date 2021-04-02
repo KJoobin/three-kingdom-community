@@ -384,5 +384,3 @@ const data = desc
   });
 
 const log = util.inspect(data, { maxStringLength: null, maxArrayLength: null, depth: 4 });
-
-console.log(log);

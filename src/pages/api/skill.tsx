@@ -13,7 +13,7 @@ export default async (req:NextApiRequest, res:NextApiResponse) => {
   // await warlordDummy();
 
   const { q } = req.query;
-  if (!q || Array.isArray(q)) {
+  if (!q) {
     res.status(404).json("not found");
     return ;
   }
@@ -80,38 +80,6 @@ export default async (req:NextApiRequest, res:NextApiResponse) => {
       },
     },
   });
-
-  // const skill = await Prisma.skill.findMany();
-  // const type = await Prisma.skillType.findMany();
-  // const warlord = await Prisma.warlord.findMany();
-
-  console.log({ result });
-
-  // const result = warlordSkillData.map((warlordData) => {
-  //   let count = 0;
-  //   queryItems.forEach((searchQ) => {
-  //     Object.entries(warlordData).find(([key, data]) => {
-  //       if (typeof data === "string") {
-  //         return data.includes(searchQ);
-  //       }
-  //       if (Array.isArray(data)) {
-  //         return !!data.find(warlord => warlord === searchQ);
-  //       }
-  //       return false;
-  //     }) && count++;
-  //   });
-  //   return { data: warlordData, count };
-  //
-  // }).filter(el => el.count > 0)
-  //   .sort((a, b) => {
-  //     if (a.count > b.count) {
-  //       return -1;
-  //     }
-  //     if (a.count === b.count) {
-  //       return 0;
-  //     }
-  //     return 1;
-  //   });
 
   res.status(200).json(result);
 

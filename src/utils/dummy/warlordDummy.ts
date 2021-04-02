@@ -29,7 +29,6 @@ export default async () => {
     }});
 
     if (findSkill && findSkill.id && findGivenSkill) {
-      console.log({ warlord });
       try {
         const create = await Prisma.warlord.create({
           data: {
@@ -40,8 +39,6 @@ export default async () => {
         });
       } catch (err) {
         console.log(err);
-        console.log({ warlord });
-        console.log({ skill, givenSkill });
       }
     }
   }

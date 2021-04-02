@@ -1,21 +1,22 @@
 import React, { useEffect, useRef, useState } from "react";
 
-import { Box, Container, Text } from "@component/atoms";
+import { BoldText, Box, Container, Text, TextProps } from "@component/atoms";
+import {Card, PointerCard} from "@component/atoms/card";
 import { InputFieldText } from "@component/molecules";
 import axios from "axios";
+import Link from "next/link";
 import { useRouter } from "next/router";
-
 // https://developer.mozilla.org/ko/docs/Web/API/AbortController/abort
 // TODO: fix build error
 // const controller = new AbortController();
 
-type SkillType = {
+export type SkillType = {
   id :number;
   name :string;
   Skill :Skill[];
 }
 
-type Skill = {
+export type Skill = {
   id :number;
   name :string;
   desc :string;
@@ -33,7 +34,7 @@ type Skill = {
   createdAt :string;
 }
 
-type Warlord = {
+export type Warlord = {
   id : number;
   name :string;
   picture? :string;
@@ -71,7 +72,6 @@ export default function SearchWarlords() {
       timeoutId.current = setTimeout(() => {
         axios.get(`/api/skill?q=${temp}`).then((res) => {
           setError("");
-          console.log(res.data);
           setResult(res.data);
         }).catch((error) => {
           setError(error.message);
@@ -115,20 +115,28 @@ export default function SearchWarlords() {
           </Box>
           : result.length > 0
             ? result.map((el, idx) => {
-              return <Box key={idx} mb={3}>
-                <Text variant={"body1"}>
-                  장수 이름: {el.name}
-                </Text>
-                <Text variant={"body1"}>
-                  등급: {el.rank}
-                </Text>
-                <Text variant={"body1"}>
-                  스킬 이름: {el.skill.name}
-                </Text>
-                <Text variant={"body1"}>
-                  전법 전승 스킬 이름: {el.givenSkill.name}
-                </Text>
-              </Box>;
+              return (
+                <Link href={`/warlord/${el.name}`}>
+                  <Box mb={3}>
+                    <PointerCard key={idx} style={{ cursor: "pointer" }}>
+                      <Box p={2} bgcolor={"white"}>
+                        <BoldText variant={"h5"}>
+                          장수 이름: {el.name}
+                        </BoldText>
+                        <BoldText variant={"body1"}>
+                          등급: {el.rank}
+                        </BoldText>
+                        <BoldText variant={"body1"}>
+                          스킬 이름: {el.skill.name}
+                        </BoldText>
+                        <BoldText variant={"body1"}>
+                          전법 전승 스킬 이름: {el.givenSkill.name}
+                        </BoldText>
+                      </Box>
+                    </PointerCard>
+                  </Box>
+                </Link>
+              );
             })
             : (<Text variant={"subtitle1"}>NO RESULT</Text>)
         }
