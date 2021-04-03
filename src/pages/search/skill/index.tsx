@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 
 import { BoldText, Box, Container, Text, TextProps } from "@component/atoms";
 import { Card, PointerCard } from "@component/atoms/card";
+import { Spinner } from "@component/atoms/spinner";
 import { InputFieldText } from "@component/molecules";
 import axios from "axios";
 import Head from "next/head";
@@ -60,6 +61,7 @@ export default function SearchWarlords() {
   const [temp, setTemp] = useState<string>("");
   const [result, setResult] = useState<Result[]>([]);
   const [error, setError] = useState<string>();
+  const [loading, setLoading] = useState<boolean>(false);
 
   const onChangeText = (e:React.ChangeEvent<HTMLInputElement>) => {
     setTemp(e.target.value);
@@ -71,11 +73,14 @@ export default function SearchWarlords() {
         clearTimeout(timeoutId.current);
       }
       timeoutId.current = setTimeout(() => {
+        setLoading(true);
         axios.get(`/api/skill?q=${temp}`).then((res) => {
           setError("");
           setResult(res.data);
         }).catch((error) => {
           setError(error.message);
+        }).finally(() => {
+          setLoading(false);
         });
       }, 300);
     }
@@ -116,36 +121,39 @@ export default function SearchWarlords() {
           <Box mb={2}>
             <Text variant={"h5"}>RESULT</Text>
           </Box>
-          {error
-            ? <Box>
-              <Text variant={"body1"}>{error}</Text>
-            </Box>
-            : result.length > 0
-              ? result.map((el, idx) => {
-                return (
-                  <Link href={`/warlord/${el.name}`}>
-                    <Box mb={3}>
-                      <PointerCard key={idx} style={{ cursor: "pointer" }}>
-                        <Box p={2} bgcolor={"white"}>
-                          <BoldText variant={"h5"}>
+
+          {loading
+            ? <Spinner />
+            : error
+              ? <Box>
+                <Text variant={"body1"}>{error}</Text>
+              </Box>
+              : result.length > 0
+                ? result.map((el, idx) => {
+                  return (
+                    <Link href={`/warlord/${el.name}`}>
+                      <Box mb={3}>
+                        <PointerCard key={idx} style={{ cursor: "pointer" }}>
+                          <Box p={2} bgcolor={"white"}>
+                            <BoldText variant={"h5"}>
                           장수 이름: {el.name}
-                          </BoldText>
-                          <BoldText variant={"body1"}>
+                            </BoldText>
+                            <BoldText variant={"body1"}>
                           등급: {el.rank}
-                          </BoldText>
-                          <BoldText variant={"body1"}>
+                            </BoldText>
+                            <BoldText variant={"body1"}>
                           스킬 이름: {el.skill.name}
-                          </BoldText>
-                          <BoldText variant={"body1"}>
+                            </BoldText>
+                            <BoldText variant={"body1"}>
                           전법 전승 스킬 이름: {el.givenSkill.name}
-                          </BoldText>
-                        </Box>
-                      </PointerCard>
-                    </Box>
-                  </Link>
-                );
-              })
-              : (<Text variant={"subtitle1"}>NO RESULT</Text>)
+                            </BoldText>
+                          </Box>
+                        </PointerCard>
+                      </Box>
+                    </Link>
+                  );
+                })
+                : (<Text variant={"subtitle1"}>NO RESULT</Text>)
           }
         </Box>
       </Container>
