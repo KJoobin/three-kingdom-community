@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from "react";
 
-import { Box, Container, Text } from "@component/atoms";
-import { PointerCard } from "@component/atoms/card";
-import { Spinner } from "@component/atoms/spinner";
+import { Box, Card, Container, Image, Spinner, Text } from "@component/atoms";
 import { Warlord } from "@pages/search/skill";
 import axios from "axios";
 import Head from "next/head";
+import Link from "next/link";
 import { useRouter } from "next/router";
 
 export default function WarlordDetail() {
   const route = useRouter();
 
-  const [picture, setPicture] = useState();
   const [result, setResult] = useState<Warlord>();
   const [error, setError] = useState<string>();
   const [loading, setLoading] = useState<boolean>(false);
@@ -54,8 +52,17 @@ export default function WarlordDetail() {
               : result
                 ? (
                   <Box mb={3}>
-                    <PointerCard style={{ cursor: "pointer" }}>
+                    <Card>
                       <Box p={2} bgcolor={"white"}>
+                        {result.picture
+                          ? (
+                            <Box display={"flex"} width={"100%"} justifyContent={"center"}>
+                              <Box width={180}>
+                                <Image src={result.picture} aspectRatio={11 / 16}/>
+                              </Box>
+                            </Box>
+                          )
+                          : <Link href={`/warlord/${result.name}/upload`} >사진 등록하기</Link>}
                         <Box p={1}>
                           <Text variant={"body1"}>
                   장수 이름: {result.name}
@@ -105,7 +112,7 @@ export default function WarlordDetail() {
                           </Text>
                         </Box>
                       </Box>
-                    </PointerCard>
+                    </Card>
                   </Box>
                 )
                 : (<Text variant={"subtitle1"}>찾으시는 장수가 없습니다.</Text>)

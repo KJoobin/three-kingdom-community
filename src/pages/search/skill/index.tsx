@@ -133,7 +133,7 @@ export default function SearchWarlords() {
                   return (
                     <Link href={`/warlord/${el.name}`}>
                       <Box mb={3}>
-                        <PointerCard key={idx} style={{ cursor: "pointer" }}>
+                        <PointerCard key={idx}>
                           <Box p={2} bgcolor={"white"}>
                             <BoldText variant={"h5"}>
                           장수 이름: {el.name}
