@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 
 import {
   Box,
@@ -7,32 +7,38 @@ import {
   Image, Spinner,
   Text,
 } from "@component/atoms";
-import { Modal } from "@component/molecules";
 import { ModalWarlordSkillSearch } from "@component/organisms";
 import { Warlord } from "@pages/search/skill";
 import axios from "axios";
-import { router } from "next/client";
 import Head from "next/head";
+import { useRouter } from "next/router";
 
 export default function WarlordCombine() {
+  const route = useRouter();
   // 1st captain, 2st vice-captain, 3st member;
   const [existWarlord, setExistWarlord] = useState<Warlord[] | null>();
   const [open, setOpen] = useState<boolean>(false);
-  const [loadingModal, setLoadingModal] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const onClick = useCallback(()=> {
     setOpen(true);
   }, []);
 
-  const pressNext = () => {
-    setLoadingModal(true);
-    axios.post("/api/combine", existWarlord)
-      .then((res) => {
-        router.push(`/warlord/combine/${res.data.id}`);
-      })
-      .catch(console.error)
-      .finally(() => setLoadingModal(false));
-  };
+  useEffect(() => {
+    const { id } = route.query;
+    if (id) {
+      setLoading(true);
+      axios.get(`/api/combine/${id}`)
+        .then((res) => {
+          console.log(res);
+          setExistWarlord(res.data.Warlord);
+        })
+        .catch(console.error)
+        .finally(() => {
+          setLoading(false);
+        });
+    }
+  }, [route]);
 
   return (
     <>
@@ -43,15 +49,7 @@ export default function WarlordCombine() {
         <desc>장수, 스킬 조합하기</desc>
       </Head>
       <Container>
-        <Box>
-          <Text variant={"h5"}>
-            보유중인 장수를 넣어주세요
-          </Text>
-          <Box style={{ display: "flex", justifyContent: "space-between" }}>
-            <Button onClick={onClick} variant={"contained"}>장수 추가 / 수정</Button>
-            {existWarlord && existWarlord.length ? <Button onClick={pressNext} variant={"contained"}>다음</Button> : null}
-          </Box>
-        </Box>
+        {loading && <Spinner />}
         <Box style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-around" }}>
           {existWarlord && existWarlord.map((warlord) => {
             return (
@@ -62,14 +60,6 @@ export default function WarlordCombine() {
           })}
         </Box>
       </Container>
-      <ModalWarlordSkillSearch open={open} onClose={() => setOpen(false)} onToggle={setExistWarlord}/>
-      <Modal open={loadingModal}>
-        <Box style={{ display: "flex", width: "100%", height: "100%", justifyContent: "center", alignItems: "center" }} >
-          <Box style={{ backgroundColor: "white" }}>
-            <Spinner />
-          </Box>
-        </Box>
-      </Modal>
     </>
   );
 }

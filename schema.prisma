@@ -43,5 +43,13 @@ model Warlord {
   givenSkillId  Int
   givenSkill Skill   @relation("givenSkill", fields:[givenSkillId], references:[id])
 
+  WarlordsCombine WarlordCombine[]
+
   createdAt  DateTime @default(now())
+}
+
+model WarlordCombine {
+     id         Int      @id @default(autoincrement())
+      Warlord      Warlord[]
+      createdAt  DateTime @default(now())
 }
