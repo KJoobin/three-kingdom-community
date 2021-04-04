@@ -897,7 +897,7 @@ export const skillData = [
   },
   {
     rank: "A",
-    name: "대항의 자벽",
+    name: "대항의 장벽",
     type: "지휘",
     target: "아군 다수(2명)",
     percentage: 100,
