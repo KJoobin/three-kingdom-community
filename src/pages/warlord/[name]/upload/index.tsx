@@ -1,25 +1,21 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
-import ReactCrop from "react-image-crop";
+import React, { ChangeEvent, ChangeEventHandler, useCallback, useEffect, useRef, useState } from "react";
+import ReactCrop, { Crop } from "react-image-crop";
 
 import axios from "axios";
 import { useRouter } from "next/router";
 
 import "react-image-crop/dist/ReactCrop.css";
 
-function generateDownload(canvas, crop, name) {
+function generateDownload(canvas:HTMLCanvasElement, crop:{[key:string]:any}, name?:string) {
   if (!crop || !canvas) {
     return;
   }
 
   canvas.toBlob(
     (blob) => {
+      if (!blob) return ;
       const formData = new FormData();
       formData.append("file", blob, `${name}.png`);
-
-      for (const [key, value] of formData.entries()) {
-        console.log(key, value);
-      }
-      console.log(blob);
 
       axios.post(`/api/upload-image?name=${name}`, formData, {
         headers: {
@@ -40,13 +36,13 @@ function generateDownload(canvas, crop, name) {
 export default function UploadWarlordImage() {
 
   const router = useRouter();
-  const [upImg, setUpImg] = useState();
-  const imgRef = useRef(null);
-  const previewCanvasRef = useRef(null);
+  const [upImg, setUpImg] = useState<string | ArrayBuffer | null>();
+  const imgRef = useRef<HTMLImageElement | null>(null);
+  const previewCanvasRef = useRef<HTMLCanvasElement | null>(null);
   const [crop, setCrop] = useState({ unit: "%", width: 15, height: 28 });
-  const [completedCrop, setCompletedCrop] = useState(null);
+  const [completedCrop, setCompletedCrop] = useState<Crop | null>(null);
 
-  const onSelectFile = (e) => {
+  const onSelectFile = (e:ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
       const reader = new FileReader();
       reader.addEventListener("load", () => setUpImg(reader.result));
@@ -72,8 +68,12 @@ export default function UploadWarlordImage() {
     const ctx = canvas.getContext("2d");
     const pixelRatio = window.devicePixelRatio;
 
+    if (!crop.width || !crop.height || !crop.x || !crop.y) return;
+
     canvas.width = crop.width * pixelRatio;
     canvas.height = crop.height * pixelRatio;
+
+    if (!ctx) return;
 
     ctx.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
     ctx.imageSmoothingQuality = "high";
@@ -96,13 +96,9 @@ export default function UploadWarlordImage() {
       <div>
         <input type="file" accept="image/*" onChange={onSelectFile} />
       </div>
-      <ReactCrop
-        src={upImg}
-        onImageLoaded={onLoad}
-        crop={crop}
-        onChange={c => setCrop(c)}
-        onComplete={c => setCompletedCrop(c)}
-      />
+      {// @ts-ignore
+        <ReactCrop src={upImg} onImageLoaded={onLoad} crop={crop} onChange={c => setCrop(c)} onComplete={c => setCompletedCrop(c)}/>
+      }
       <div>
         <canvas
           ref={previewCanvasRef}
@@ -117,15 +113,14 @@ export default function UploadWarlordImage() {
         Note that the download below won't work in this sandbox due to the
         iframe missing 'allow-downloads'. It's just for your reference.
       </p>
+      {previewCanvasRef.current &&
       <button
         type="button"
         disabled={!completedCrop?.width || !completedCrop?.height}
-        onClick={() =>
-          generateDownload(previewCanvasRef.current, completedCrop, router.query.name)
-        }
-      >
-        Download cropped image
+        onClick={() => generateDownload(previewCanvasRef.current as HTMLCanvasElement, completedCrop as Crop, router.query.name as string)}>
+          Download cropped image
       </button>
+      }
     </div>
   );
 }

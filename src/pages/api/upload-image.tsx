@@ -3,7 +3,6 @@ import { Storage } from "@google-cloud/storage";
 import { PrismaClient } from "@prisma/client";
 import multer from "multer";
 import { NextApiRequest, NextApiResponse } from "next";
-import path from "path";
 
 
 const serviceKey = "keys.json";
@@ -24,9 +23,9 @@ const multerMid = multer({
 
 const bucket = storage.bucket("three-kingdom");
 
-function runMiddleware(req:NextApiRequest, res:NextApiResponse, fn) {
+function runMiddleware(req:NextApiRequest, res:NextApiResponse, fn:Function) {
   return new Promise((resolve, reject) => {
-    fn(req, res, (result) => {
+    fn(req, res, (result: any) => {
       if (result instanceof Error) {
         return reject(result);
       }
@@ -41,13 +40,17 @@ export const config = {
   },
 };
 
+type NextApiFileRequest = NextApiRequest & {
+  file?: any
+}
 
-export default async (req:NextApiRequest, res:NextApiResponse) => {
+
+export default async (req:NextApiFileRequest, res:NextApiResponse) => {
 
   await runMiddleware(req, res, multerMid.single("file"));
 
   const { name } = req.query;
-  const { originalname, buffer } = req.file;
+  const { originalname, buffer } = req?.file;
   console.log({ name, originalname, buffer });
 
   if (!name) {
