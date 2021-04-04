@@ -81,6 +81,23 @@ export default async (req:NextApiRequest, res:NextApiResponse) => {
     },
   });
 
-  res.status(200).json(result);
+  const countingResult = result.reduce((acc, warlord) => {
+    let count = 0;
+    queryItems.forEach((el) => {
+      if (warlord.name.includes(el)) {
+        ++count;
+      }
+      if (warlord.skill.name.includes(el)) {
+        ++count;
+      }
+    });
+    console.log({ acc });
+    acc.push({ warlord, count });
+    return acc;
+  }, [] as any).sort((a:{count:number}, b:{count:number}) => {
+    return b.count - a.count;
+  });
+
+  res.status(200).json(countingResult.map((el:{warlord: {[key:string]:any}}) => el.warlord));
 
 };
