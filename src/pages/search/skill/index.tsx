@@ -114,8 +114,7 @@ export default function SearchWarlords() {
             label={"장수 이름 또는 전법 이름"}
             InputLabelProps={{ shrink: true }}
             value={temp}
-            onChange={onChangeText}
-          />
+            onChange={onChangeText}/>
         </Box>
         <Box>
           <Box mb={2}>

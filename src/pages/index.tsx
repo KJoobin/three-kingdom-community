@@ -25,6 +25,13 @@ export default function Home() {
                   </Link>
                 </Text>
               </Box>
+              <Box py={1}>
+                <Text variant={"h5"}>
+                  <Link href={"warlord/combine"}>
+                    장수 조합
+                  </Link>
+                </Text>
+              </Box>
             </Box>
           </main>
           <footer>

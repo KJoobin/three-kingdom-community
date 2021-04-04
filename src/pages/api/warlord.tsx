@@ -8,7 +8,7 @@ const Prisma = new PrismaClient();
 
 export default async (req:NextApiRequest, res:NextApiResponse) => {
 
-  const { name } = req.query;
+  const { name, all } = req.query;
 
   const cacheKey = `warlord-${name}`;
   if (cache.has(cacheKey)) {
@@ -16,6 +16,31 @@ export default async (req:NextApiRequest, res:NextApiResponse) => {
     console.log({ cacheKey });
     console.log({ result });
 
+    res.status(200).json(result);
+    return ;
+  }
+
+  if (all && all === "true") {
+
+    const allCacheKey = "warlord-all";
+
+    const result = cache.has(allCacheKey)
+      ? cache.get(allCacheKey)
+      : await Prisma.warlord.findMany({
+        include: {
+          skill: {
+            include: {
+              Type: true,
+            },
+          },
+          givenSkill: {
+            include: {
+              Type: true,
+            },
+          },
+        }});
+
+    !cache.has(allCacheKey) && cache.set(allCacheKey, result);
     res.status(200).json(result);
     return ;
   }

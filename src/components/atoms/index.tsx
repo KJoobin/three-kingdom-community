@@ -5,4 +5,5 @@ export * from "./container";
 export * from "./image";
 export * from "./spinner";
 export * from "./text";
+export * from "./button"
 
