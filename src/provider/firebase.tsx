@@ -1,7 +1,8 @@
 import React from "react";
 
+import firebase from "firebase/app";
+
 export const FirebaseProvider:React.FunctionComponent = ({ children }) => {
-  const firebase = require("firebase/app");
   const firebaseConfig = {
     apiKey: "AIzaSyA-WsJd-d3Xopk0d8MKvT8A5RHwl_lFu7w",
     authDomain: "three-kingdoms-517f2.firebaseapp.com",
@@ -14,7 +15,6 @@ export const FirebaseProvider:React.FunctionComponent = ({ children }) => {
   // Initialize Firebase
   if (!firebase.apps.length) {
     firebase.initializeApp(firebaseConfig);
-    firebase.analytics();
   }
   return <>{children}</>;
 };
