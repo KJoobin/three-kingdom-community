@@ -1,3 +1,5 @@
+import React from "react";
+
 import { Box, Container, Image, Text } from "@component/atoms";
 import Head from "next/head";
 import Link from "next/link";
@@ -13,12 +15,9 @@ export default function Home() {
         <meta name="google-site-verification" content="BpKt2jxZjZiGovOmRQWQIWPtaejyVNROK2U0Q7cH2h0" />
       </Head>
       <Container>
-        <Box height={"calc(100vh - 16px)"} display={"flex"} flexDirection={"column"} justifyContent={"space-between"}>
+        <Box style={{ height: "calc(100vh - 16px)", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
           <main>
             <Box>
-              <Box maxWidth={"100vw"}>
-                <Image src={"./images/main-image.png"} width={"100%"} height={"100%"}/>
-              </Box>
               <Box py={1}>
                 <Text variant={"h5"}>
                   <Link href={"search/skill"}>
