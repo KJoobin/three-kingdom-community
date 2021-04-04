@@ -2,11 +2,23 @@
 import { PrismaClient } from "@prisma/client";
 import { NextApiRequest, NextApiResponse } from "next";
 
+import { cache } from "./skill";
+
 const Prisma = new PrismaClient();
 
 export default async (req:NextApiRequest, res:NextApiResponse) => {
 
   const { name } = req.query;
+
+  const cacheKey = `warlord-${name}`;
+  if (cache.has(cacheKey)) {
+    const result = cache.get(cacheKey);
+    console.log({ cacheKey });
+    console.log({ result });
+
+    res.status(200).json(result);
+    return ;
+  }
 
   if (!name) {
     res.status(404).json("not found");
@@ -35,8 +47,7 @@ export default async (req:NextApiRequest, res:NextApiResponse) => {
     },
   });
 
-  console.log({ result });
-
+  cache.set(cacheKey, result);
   res.status(200).json(result);
 
 };

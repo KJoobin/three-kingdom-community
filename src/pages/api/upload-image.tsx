@@ -1,5 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import { Storage } from "@google-cloud/storage";
+import { cache } from "@pages/api/skill";
 import { PrismaClient } from "@prisma/client";
 import multer from "multer";
 import { NextApiRequest, NextApiResponse } from "next";
@@ -41,7 +42,7 @@ export const config = {
 };
 
 type NextApiFileRequest = NextApiRequest & {
-  file?: any
+  file?: any;
 }
 
 
@@ -69,6 +70,7 @@ export default async (req:NextApiFileRequest, res:NextApiResponse) => {
 
   blobStream.on("finish", () => {
     const publicUrl = `https://storage.googleapis.com/${bucket.name}/${blob.name}`;
+    cache.del(`warlord-${name}`);
     const result = Prisma.warlord.update({
       data: {
         picture: publicUrl,

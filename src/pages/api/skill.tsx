@@ -4,8 +4,10 @@ import skillDummy from "@utils/dummy/skillDummy";
 import skillTypeDummy from "@utils/dummy/skillTypeDummy";
 import warlordDummy from "@utils/dummy/warlordDummy";
 import { NextApiRequest, NextApiResponse } from "next";
+import NodeCache from "node-cache";
 
 const Prisma = new PrismaClient();
+export const cache = new NodeCache();
 
 export default async (req:NextApiRequest, res:NextApiResponse) => {
   // await skillTypeDummy();
@@ -20,6 +22,15 @@ export default async (req:NextApiRequest, res:NextApiResponse) => {
   if (Array.isArray(q)) {
     res.status(400).json("unexpected type");
     return;
+  }
+
+  const cacheKey = `query-${q}`;
+
+  if (cache.has(cacheKey)) {
+    console.log("has key ? ", cache.has(cacheKey));
+    const queryCache = cache.get(cacheKey) as {warlord: {[key:string]:any}}[];
+    res.status(200).json(queryCache.map(el => el.warlord));
+    return ;
   }
 
   const queryItems:string[] = [];
@@ -91,12 +102,13 @@ export default async (req:NextApiRequest, res:NextApiResponse) => {
         ++count;
       }
     });
-    console.log({ acc });
     acc.push({ warlord, count });
     return acc;
   }, [] as any).sort((a:{count:number}, b:{count:number}) => {
     return b.count - a.count;
   });
+
+  cache.set(cacheKey, countingResult);
 
   res.status(200).json(countingResult.map((el:{warlord: {[key:string]:any}}) => el.warlord));
 
