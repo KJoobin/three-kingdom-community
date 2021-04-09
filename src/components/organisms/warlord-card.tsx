@@ -37,8 +37,8 @@ export const WarlordCard:React.FunctionComponent<WarlordCardProps> = ({
   }, [expand]);
 
   return (
-    <PointerCard>
-      <Box style={{ padding: 8, transition: `max-height ${ANIMATION_DURATION}s ease-in-out`, maxHeight: expand ? 1000 : 150 }}>
+    <PointerCard style={{ backgroundColor: "white" }}>
+      <Box style={{ padding: 8, transition: `max-height ${ANIMATION_DURATION}s ease-in-out`, maxHeight: expand ? 1000 : 150 }} bgcolor={"white"}>
         {renderOpen
           ? <WarlordCardOpen warlord={warlord} onClick={() => setExpand(prev => !prev)} />
           : <WarlordCardClose warlord={warlord} onClick={() => setExpand(prev => !prev)} />

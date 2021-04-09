@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Box, Container, Image, Text } from "@component/atoms";
+import { Box, Container, Text } from "@component/atoms";
 import Head from "next/head";
 import Link from "next/link";
 

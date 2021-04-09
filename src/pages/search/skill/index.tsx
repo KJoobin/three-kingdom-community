@@ -129,7 +129,9 @@ export default function SearchWarlords() {
               : result.length > 0
                 ? result.map((el, idx) => {
                   return (
-                    <WarlordCard key={idx} warlord={el} />
+                    <Box key={idx} mb={3}>
+                      <WarlordCard warlord={el} />
+                    </Box>
                   );
                 })
                 : (<Text variant={"subtitle1"}>NO RESULT</Text>)
