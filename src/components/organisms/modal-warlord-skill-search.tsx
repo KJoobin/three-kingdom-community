@@ -4,7 +4,6 @@ import { Box, Button, Card, Image, Spinner } from "@component/atoms";
 import { InputFieldText, Modal, ModalProps } from "@component/molecules";
 import { Warlord } from "@pages/search/skill";
 import axios from "axios";
-import { exists } from "fs";
 
 export type ModalWarlordSkillSearchProps = Omit<ModalProps, "children"> & {
   onToggle : (e:Warlord[]) => void;

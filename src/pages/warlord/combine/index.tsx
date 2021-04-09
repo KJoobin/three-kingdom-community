@@ -11,11 +11,12 @@ import { Modal } from "@component/molecules";
 import { ModalWarlordSkillSearch } from "@component/organisms";
 import { Warlord } from "@pages/search/skill";
 import axios from "axios";
-import { router } from "next/client";
 import Head from "next/head";
+import { useRouter } from "next/router";
 
 export default function WarlordCombine() {
   // 1st captain, 2st vice-captain, 3st member;
+  const router = useRouter();
   const [existWarlord, setExistWarlord] = useState<Warlord[] | null>();
   const [open, setOpen] = useState<boolean>(false);
   const [loadingModal, setLoadingModal] = useState(false);
