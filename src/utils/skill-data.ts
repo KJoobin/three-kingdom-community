@@ -89,7 +89,7 @@ export const seasonTwoSkillData = [
   },
   {
     rank: "S",
-    name: "창병 영융",
+    name: "창병 영웅",
     type: "패시브",
     target: "자신",
     percentage: 100,

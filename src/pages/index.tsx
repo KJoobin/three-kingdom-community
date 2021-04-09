@@ -27,6 +27,13 @@ export default function Home() {
               </Box>
               <Box py={1}>
                 <Text variant={"h5"}>
+                  <Link href={"warlord/season/2"}>
+                    시즌 2 장수 모두 보기
+                  </Link>
+                </Text>
+              </Box>
+              <Box py={1}>
+                <Text variant={"h5"}>
                   {/*<Link href={"warlord/combine"}>*/}
                   {/*  장수 조합*/}
                   {/*</Link>*/}

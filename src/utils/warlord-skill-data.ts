@@ -44,7 +44,7 @@ export const seasonTwoWarlordSkillData:WarlordSkillDummy[] = [
   },
   {
     rank: "S",
-    name: "마운촉",
+    name: "마운록",
     season: 2,
     skill: "서주철기",
     givenSkill: "허점 공략",
