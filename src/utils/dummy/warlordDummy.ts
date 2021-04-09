@@ -1,7 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import { PrismaClient } from "@prisma/client";
-import { skillData } from "@utils/skill-data";
-import { warlordSkillData } from "@utils/warlord-skill-data";
+import { seasonTwoWarlordSkillData, warlordSkillData } from "@utils/warlord-skill-data";
 
 const Prisma = new PrismaClient();
 
@@ -18,7 +17,7 @@ model warlord {
 * */
 
 export default async () => {
-  for (const { skill, givenSkill, ...warlord } of warlordSkillData) {
+  for (const { skill, givenSkill, ...warlord } of seasonTwoWarlordSkillData) {
 
     const findSkill = await Prisma.skill.findFirst({ where: {
       name: skill,

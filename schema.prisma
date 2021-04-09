@@ -36,6 +36,7 @@ model Warlord {
   name       String   @unique
   picture    String?
   rank       String
+  season     Int?
 
   skillId   Int
   skill      Skill   @relation("skill", fields:[skillId], references:[id])

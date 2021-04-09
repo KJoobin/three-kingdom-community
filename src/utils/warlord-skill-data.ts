@@ -1,4 +1,71 @@
-export const warlordSkillData:{rank:string; name:string; skill: string; givenSkill:string}[] = [
+type WarlordSkillDummy = {
+  rank:string;
+  name:string;
+  season?:number;
+  skill: string;
+  givenSkill:string;
+}
+
+export const seasonTwoWarlordSkillData:WarlordSkillDummy[] = [
+  {
+    rank: "S",
+    name: "사마의",
+    season: 2,
+    skill: "낭고준수",
+    givenSkill: "신통한 재능",
+  },
+  {
+    rank: "S",
+    name: "장료",
+    season: 2,
+    skill: "적진 기습",
+    givenSkill: "용감한 선봉",
+  },
+  {
+    rank: "S",
+    name: "방통",
+    season: 2,
+    skill: "연환계",
+    givenSkill: "허점 공략",
+  },
+  {
+    rank: "S",
+    name: "손상향",
+    season: 2,
+    skill: "궁요희",
+    givenSkill: "결맹",
+  },
+  {
+    rank: "S",
+    name: "장굉",
+    season: 2,
+    skill: "뛰어난 다스림",
+    givenSkill: "지계",
+  },
+  {
+    rank: "S",
+    name: "마운촉",
+    season: 2,
+    skill: "서주철기",
+    givenSkill: "허점 공략",
+  },
+  {
+    rank: "S",
+    name: "장씨",
+    season: 2,
+    skill: "창병 영웅",
+    givenSkill: "용감한 선봉",
+  },
+  {
+    rank: "S",
+    name: "진궁",
+    season: 2,
+    skill: "천방백계",
+    givenSkill: "지계",
+  },
+];
+
+export const warlordSkillData:WarlordSkillDummy[] = [
   {
     rank: "S",
     name: "전위",
