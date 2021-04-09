@@ -1,15 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
 
-import { BoldText, Box, Container, Text, TextProps } from "@component/atoms";
-import { Card, PointerCard } from "@component/atoms/card";
+import { Box, Container, Text } from "@component/atoms";
 import { Spinner } from "@component/atoms/spinner";
 import { InputFieldText } from "@component/molecules";
 import { WarlordCard } from "@component/organisms/warlord-card";
 import axios from "axios";
 import Head from "next/head";
 import { useRouter } from "next/router";
+
 // https://developer.mozilla.org/ko/docs/Web/API/AbortController/abort
-// TODO: fix build error
 const controller = new AbortController();
 
 export type SkillType = {
