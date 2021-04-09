@@ -55,11 +55,6 @@ export default function SearchWarlords() {
   const route = useRouter();
 
   const timeoutId = useRef<any>();
-  const abort = useRef<any>();
-
-  if (typeof window !== "undefined" && !abort.current) {
-    abort.current = new AbortController().abort;
-  }
 
   const [temp, setTemp] = useState<string>("");
   const [result, setResult] = useState<Result[]>([]);
@@ -73,7 +68,7 @@ export default function SearchWarlords() {
   useEffect(() => {
     if (temp) {
       if (timeoutId.current) {
-        abort.current();
+        // abort.current();
         clearTimeout(timeoutId.current);
       }
       timeoutId.current = setTimeout(() => {
