@@ -55,6 +55,7 @@ export default function SearchWarlords() {
   const route = useRouter();
 
   const timeoutId = useRef<any>();
+  const searchTemp = useRef<string>("");
 
   const [temp, setTemp] = useState<string>("");
   const [result, setResult] = useState<Result[]>([]);
@@ -68,17 +69,20 @@ export default function SearchWarlords() {
   useEffect(() => {
     if (temp) {
       if (timeoutId.current) {
-        // abort.current();
         clearTimeout(timeoutId.current);
       }
+      searchTemp.current = temp;
       timeoutId.current = setTimeout(() => {
         setLoading(true);
         axios.get(`/api/skill?q=${temp}`).then((res) => {
+          if (searchTemp.current !== temp) {
+            return;
+          }
           setError("");
           setResult(res.data);
+          setLoading(false);
         }).catch((error) => {
           setError(error.message);
-        }).finally(() => {
           setLoading(false);
         });
       }, 300);
