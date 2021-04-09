@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import { Box, Card, Container, Image, Spinner, Text } from "@component/atoms";
+import { WarlordCard } from "@component/organisms/warlord-card";
 import { Warlord } from "@pages/search/skill";
 import axios from "axios";
 import Head from "next/head";
@@ -52,67 +53,7 @@ export default function WarlordDetail() {
               : result
                 ? (
                   <Box mb={3}>
-                    <Card>
-                      <Box p={2} bgcolor={"white"}>
-                        {result.picture
-                          ? (
-                            <Box display={"flex"} width={"100%"} justifyContent={"center"}>
-                              <Box width={180}>
-                                <Image src={result.picture} aspectRatio={11 / 16}/>
-                              </Box>
-                            </Box>
-                          )
-                          : <Link href={`/warlord/${result.name}/upload`} >사진 등록하기</Link>}
-                        <Box p={1}>
-                          <Text variant={"body1"}>
-                  장수 이름: {result.name}
-                          </Text>
-                          <Text variant={"body1"}>
-                  등급: {result.rank}
-                          </Text>
-                        </Box>
-                        <Box width={"100%"} height={2} bgcolor={"divider"}/>
-                        <Box p={1}>
-                          <Box display={"flex"} style={{ justifyContent: "center" }}>
-                            <Text variant={"h5"}>스킬</Text>
-                          </Box>
-                          <Text variant={"body1"}>
-                        이름: {result.skill.name}
-                          </Text>
-                          <Text variant={"body1"}>
-                      타입: {result.skill.Type.name}
-                          </Text>
-                          <Text variant={"body1"}>
-                      확률: {result.skill.percentage}%
-                          </Text>
-                          <Text variant={"body1"}>
-                      타겟: {result.skill.target}
-                          </Text>
-                          <Text variant={"body1"}>{result.skill.desc}
-                          </Text>
-                        </Box>
-                        <Box width={"100%"} height={2} bgcolor={"divider"}/>
-                        <Box p={1}>
-                          <Box display={"flex"} style={{ justifyContent: "center" }}>
-                            <Text variant={"h5"}>전법 스킬</Text>
-                          </Box>
-                          <Text variant={"body1"}>
-                        이름: {result.givenSkill.name}
-                          </Text>
-                          <Text variant={"body1"}>
-                         타입: {result.givenSkill.Type.name}
-                          </Text>
-                          <Text variant={"body1"}>
-                         확률: {result.givenSkill.percentage}%
-                          </Text>
-                          <Text variant={"body1"}>
-                         타겟: {result.givenSkill.target}
-                          </Text>
-                          <Text variant={"body1"}>{result.givenSkill.desc}
-                          </Text>
-                        </Box>
-                      </Box>
-                    </Card>
+                    <WarlordCard warlord={result} />
                   </Box>
                 )
                 : (<Text variant={"subtitle1"}>찾으시는 장수가 없습니다.</Text>)

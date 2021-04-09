@@ -4,13 +4,13 @@ import { BoldText, Box, Container, Text, TextProps } from "@component/atoms";
 import { Card, PointerCard } from "@component/atoms/card";
 import { Spinner } from "@component/atoms/spinner";
 import { InputFieldText } from "@component/molecules";
+import { WarlordCard } from "@component/organisms/warlord-card";
 import axios from "axios";
 import Head from "next/head";
-import Link from "next/link";
 import { useRouter } from "next/router";
 // https://developer.mozilla.org/ko/docs/Web/API/AbortController/abort
 // TODO: fix build error
-// const controller = new AbortController();
+const controller = new AbortController();
 
 export type SkillType = {
   id :number;
@@ -70,6 +70,7 @@ export default function SearchWarlords() {
   useEffect(() => {
     if (temp) {
       if (timeoutId.current) {
+        controller.abort();
         clearTimeout(timeoutId.current);
       }
       timeoutId.current = setTimeout(() => {
@@ -130,26 +131,7 @@ export default function SearchWarlords() {
               : result.length > 0
                 ? result.map((el, idx) => {
                   return (
-                    <Link href={`/warlord/${el.name}`}>
-                      <Box mb={3}>
-                        <PointerCard key={idx}>
-                          <Box p={2} bgcolor={"white"}>
-                            <BoldText variant={"h5"}>
-                          장수 이름: {el.name}
-                            </BoldText>
-                            <BoldText variant={"body1"}>
-                          등급: {el.rank}
-                            </BoldText>
-                            <BoldText variant={"body1"}>
-                          스킬 이름: {el.skill.name}
-                            </BoldText>
-                            <BoldText variant={"body1"}>
-                          전법 전승 스킬 이름: {el.givenSkill.name}
-                            </BoldText>
-                          </Box>
-                        </PointerCard>
-                      </Box>
-                    </Link>
+                    <WarlordCard key={idx} warlord={el} />
                   );
                 })
                 : (<Text variant={"subtitle1"}>NO RESULT</Text>)
