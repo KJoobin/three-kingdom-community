@@ -9,7 +9,6 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 
 // https://developer.mozilla.org/ko/docs/Web/API/AbortController/abort
-const controller = new AbortController();
 
 export type SkillType = {
   id :number;
@@ -56,6 +55,11 @@ export default function SearchWarlords() {
   const route = useRouter();
 
   const timeoutId = useRef<any>();
+  const abort = useRef<any>();
+
+  if (typeof window !== "undefined" && !abort.current) {
+    abort.current = new AbortController().abort;
+  }
 
   const [temp, setTemp] = useState<string>("");
   const [result, setResult] = useState<Result[]>([]);
@@ -69,7 +73,7 @@ export default function SearchWarlords() {
   useEffect(() => {
     if (temp) {
       if (timeoutId.current) {
-        controller.abort();
+        abort.current();
         clearTimeout(timeoutId.current);
       }
       timeoutId.current = setTimeout(() => {
