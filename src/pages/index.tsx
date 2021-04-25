@@ -41,13 +41,6 @@ export default function Home() {
               </Box>
             </Box>
           </main>
-          <footer>
-            <Box p={1}>
-              <Text>
-          마지막 업데이트 : 2021년 4월 4일 14:49
-              </Text>
-            </Box>
-          </footer>
         </Box>
       </Container>
     </>
