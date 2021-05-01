@@ -1,20 +1,25 @@
 import React, { useEffect, useRef, useState } from "react";
 
 import { Box, PointerCard } from "@component/atoms";
+import { SkillCardClose } from "@component/molecules/skill-card-close";
+import { SkillCardOpen } from "@component/molecules/skill-card-open";
+import { SkillCardOpenFix } from "@component/molecules/skill-card-open-fix";
 import { WarlordCardClose } from "@component/molecules/warlord-card-close";
 import { WarlordCardOpen } from "@component/molecules/warlord-card-open";
 import { WarlordCardOpenFix } from "@component/molecules/warlord-card-open-fix";
-import { Warlord } from "@pages/search/skill";
+import { Skill, Warlord } from "@pages/search/skill";
 
 const ANIMATION_DURATION = 1;
 
-export type WarlordCardProps = {
-  warlord: Warlord;
+export type SearchSkillWarlordCardProps = {
+  warlord?: Warlord;
+  skill?: Skill;
   fixable?:boolean;
 }
 
-export const WarlordCard:React.FunctionComponent<WarlordCardProps> = ({
+export const SearchSkillWarlordCard:React.FunctionComponent<SearchSkillWarlordCardProps> = ({
   warlord,
+  skill,
   fixable,
 }) => {
   const [expand, setExpand] = useState(false);
@@ -42,10 +47,17 @@ export const WarlordCard:React.FunctionComponent<WarlordCardProps> = ({
   return (
     <PointerCard style={{ backgroundColor: "white" }}>
       <Box style={{ padding: 8, transition: `max-height ${ANIMATION_DURATION}s ease-in-out`, maxHeight: expand ? 1000 : 150 }} bgcolor={"white"}>
-        {renderOpen
-          ? (fixable ? <WarlordCardOpenFix warlord={warlord} onClick={() => setExpand(prev => !prev)} /> : <WarlordCardOpen warlord={warlord} onClick={() => setExpand(prev => !prev)} />)
-          : <WarlordCardClose warlord={warlord} onClick={() => setExpand(prev => !prev)} />
+        {warlord && (
+          renderOpen
+            ? (fixable ? <WarlordCardOpenFix warlord={warlord} onClick={() => setExpand(prev => !prev)} /> : <WarlordCardOpen warlord={warlord} onClick={() => setExpand(prev => !prev)} />)
+            : <WarlordCardClose warlord={warlord} onClick={() => setExpand(prev => !prev)} />)
         }
+        {skill && (
+          renderOpen
+            ? (fixable ? <SkillCardOpenFix skill={skill} onClick={() => setExpand(prev => !prev)} /> : <SkillCardOpen skill={skill} onClick={() => setExpand(prev => !prev)} />)
+            : <SkillCardClose skill={skill} onClick={() => setExpand(prev => !prev)} />)
+        }
+
       </Box>
     </PointerCard>
   );

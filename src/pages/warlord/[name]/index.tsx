@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import { Box, Card, Container, Image, Spinner, Text } from "@component/atoms";
-import { WarlordCard } from "@component/organisms/warlord-card";
+import { SearchSkillWarlordCard } from "@component/organisms/search-skill-warlord-card";
 import { Warlord } from "@pages/search/skill";
 import axios from "axios";
 import Head from "next/head";
@@ -53,7 +53,7 @@ export default function WarlordDetail() {
               : result
                 ? (
                   <Box mb={3}>
-                    <WarlordCard warlord={result} />
+                    <SearchSkillWarlordCard warlord={result} />
                   </Box>
                 )
                 : (<Text variant={"subtitle1"}>찾으시는 장수가 없습니다.</Text>)

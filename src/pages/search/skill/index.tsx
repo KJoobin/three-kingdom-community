@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Box, Container, Text } from "@component/atoms";
 import { Spinner } from "@component/atoms/spinner";
 import { InputFieldText } from "@component/molecules";
-import { WarlordCard } from "@component/organisms/warlord-card";
+import { SearchSkillWarlordCard } from "@component/organisms/search-skill-warlord-card";
 import axios from "axios";
 import Head from "next/head";
 import { useRouter } from "next/router";
@@ -49,7 +49,7 @@ export type Warlord = {
   createdAt :string;
 }
 
-type Result = Warlord;
+type Result = Warlord | Skill;
 
 export default function SearchWarlords() {
   const route = useRouter();
@@ -134,7 +134,7 @@ export default function SearchWarlords() {
                 ? result.map((el, idx) => {
                   return (
                     <Box key={idx} mb={3}>
-                      <WarlordCard warlord={el} />
+                      <SearchSkillWarlordCard {...("skill" in el ? { warlord: el } : { skill: el })} />
                     </Box>
                   );
                 })
