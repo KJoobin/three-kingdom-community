@@ -1,5 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import { PrismaClient } from "@prisma/client";
+import skillDummy from "@utils/dummy/skillDummy";
 import { NextApiRequest, NextApiResponse } from "next";
 import NodeCache from "node-cache";
 
@@ -11,7 +12,7 @@ export default async (req:NextApiRequest, res:NextApiResponse) => {
   // await skillDummy();
   // await warlordDummy();
 
-  const { q, all } = req.query;
+  const { q } = req.query;
   const cacheKey = `query-${q}`;
 
   if (req.method === "PUT") {
@@ -52,25 +53,6 @@ export default async (req:NextApiRequest, res:NextApiResponse) => {
     }
 
   } else {
-
-    if (all && process.env.NODE_ENV === "development") {
-      const result = await Prisma.warlord.findMany({
-        include: {
-          skill: {
-            include: {
-              Type: true,
-            },
-          },
-          givenSkill: {
-            include: {
-              Type: true,
-            },
-          },
-        },
-      });
-      res.status(200).json(result);
-      return;
-    }
     if (!q) {
       res.status(404).json("not found");
       return;
@@ -133,7 +115,7 @@ export default async (req:NextApiRequest, res:NextApiResponse) => {
       );
     });
 
-    const result = await Prisma.warlord.findMany({
+    const warlords = await Prisma.warlord.findMany({
       where: {
         OR: or,
       },
@@ -151,7 +133,26 @@ export default async (req:NextApiRequest, res:NextApiResponse) => {
       },
     });
 
-    const countingResult = result.reduce((acc, warlord) => {
+    const skills = queryItems.length > 0 ? await Prisma.skill.findMany({
+      where: {
+        AND: {
+          warlord: {
+            none: {},
+          },
+          OR: queryItems.map(query => ({ name: {
+            contains: query,
+          }})),
+        },
+      },
+      include: {
+        warlord: true,
+        Type: true,
+      },
+    }) : [];
+
+    console.log({ skills });
+
+    const countingWarlords = warlords.reduce((acc, warlord) => {
       let count = 0;
       queryItems.forEach((el) => {
         if (warlord.name.includes(el)) {
@@ -163,12 +164,28 @@ export default async (req:NextApiRequest, res:NextApiResponse) => {
       });
       acc.push({ warlord, count });
       return acc;
-    }, [] as any).sort((a: { count: number }, b: { count: number }) => {
+    }, [] as any);
+    const countingSkills = skills.reduce((acc, skill) => {
+      let count = 0;
+      queryItems.forEach((el) => {
+        if (skill.name.includes(el)) {
+          ++count;
+        }
+      });
+      acc.push({ skill, count });
+      return acc;
+    }, [] as any);
+
+    const countingResult = [...countingWarlords, ...countingSkills];
+
+    countingResult.sort((a: { count: number }, b: { count: number }) => {
       return b.count - a.count;
     });
 
+    console.log({ countingResult });
+
     cache.set(cacheKey, countingResult);
 
-    res.status(200).json(countingResult.map((el: { warlord: { [key: string]: any } }) => el.warlord));
+    res.status(200).json(countingResult.map(el => el.warlord || el.skill));
   }
 };
