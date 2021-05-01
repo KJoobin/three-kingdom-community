@@ -98,8 +98,6 @@ export default async (req:NextApiRequest, res:NextApiResponse) => {
       },
     });
 
-    console.log(result);
-
     cache.set(cacheKey, result);
     res.status(200).json(result);
   }
