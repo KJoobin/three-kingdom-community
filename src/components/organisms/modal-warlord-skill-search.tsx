@@ -69,7 +69,6 @@ export const ModalWarlordSkillSearch:React.FunctionComponent<ModalWarlordSkillSe
 
   useEffect(() => {
     if (allWarlords) {
-      console.log(allWarlords?.filter(warlord => selected.includes(warlord.id)));
       onToggle(allWarlords?.filter(warlord => selected.includes(warlord.id)));
     }
   }, [selected]);

@@ -32,7 +32,6 @@ export default async () => {
           skillTypeId,
         },
       });
-      console.log({ create });
     }
   }
 };

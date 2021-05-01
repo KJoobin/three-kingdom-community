@@ -30,7 +30,6 @@ export default function WarlordCombine() {
       setLoading(true);
       axios.get(`/api/combine/${id}`)
         .then((res) => {
-          console.log(res);
           setExistWarlord(res.data.Warlord);
         })
         .catch(console.error)

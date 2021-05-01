@@ -52,7 +52,6 @@ export default async (req:NextApiFileRequest, res:NextApiResponse) => {
 
   const { name } = req.query;
   const { originalname, buffer } = req?.file;
-  console.log({ name, originalname, buffer });
 
   if (!name) {
     res.status(404).json("not found");

@@ -13,14 +13,10 @@ export default async (req:NextApiRequest, res:NextApiResponse) => {
   const cacheKey = `warlord${name ? `-${name}` : ""}${season ? `-${season}` : ""}`;
   if (cache.has(cacheKey)) {
     const result = cache.get(cacheKey);
-    console.log({ cacheKey });
-    console.log({ result });
 
     res.status(200).json(result);
     return ;
   }
-
-  console.log(cacheKey);
 
   if (all && all === "true") {
 

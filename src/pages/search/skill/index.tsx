@@ -66,8 +66,6 @@ export default function SearchWarlords() {
     setTemp(e.target.value);
   };
 
-  console.log({ result });
-
   useEffect(() => {
     if (temp) {
       if (timeoutId.current) {
