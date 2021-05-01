@@ -33,7 +33,7 @@ export const SkillCardOpen:React.FunctionComponent<SkillCardOpenProps> = forward
         <Text variant={"body1"}>
           타겟: {skill.target}
         </Text>
-        <Text variant={"body1"}>{skill.desc}
+        <Text variant={"body1"} style={{ whiteSpace: "pre-line", lineHeight: 2 }}>{skill.desc}
         </Text>
       </Box>
       <Box width={"100%"} height={2} bgcolor={"divider"}/>

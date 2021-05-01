@@ -66,6 +66,8 @@ export default function SearchWarlords() {
     setTemp(e.target.value);
   };
 
+  console.log({ result });
+
   useEffect(() => {
     if (temp) {
       if (timeoutId.current) {
@@ -132,7 +134,6 @@ export default function SearchWarlords() {
               </Box>
               : result.length > 0
                 ? result.map((el, idx) => {
-                  console.log({ el });
                   return (
                     <Box key={idx} mb={3}>
                       <SearchSkillWarlordCard {...("skill" in el ? { warlord: el } : { skill: el })} />

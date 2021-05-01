@@ -150,8 +150,6 @@ export default async (req:NextApiRequest, res:NextApiResponse) => {
       },
     }) : [];
 
-    console.log({ skills });
-
     const countingWarlords = warlords.reduce((acc, warlord) => {
       let count = 0;
       queryItems.forEach((el) => {
@@ -181,8 +179,6 @@ export default async (req:NextApiRequest, res:NextApiResponse) => {
     countingResult.sort((a: { count: number }, b: { count: number }) => {
       return b.count - a.count;
     });
-
-    console.log({ countingResult });
 
     cache.set(cacheKey, countingResult);
 

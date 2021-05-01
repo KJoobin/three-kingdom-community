@@ -70,7 +70,7 @@ export const WarlordCardOpen:React.FunctionComponent<WarlordCardOpenProps> = for
         <Text variant={"body1"}>
           타겟: {warlord.givenSkill.target}
         </Text>
-        <Text variant={"body1"}>{warlord.givenSkill.desc}
+        <Text variant={"body1"} style={{ whiteSpace: "pre-line", lineHeight: 2 }}>{warlord.givenSkill.desc}
         </Text>
       </Box>
     </Box>
