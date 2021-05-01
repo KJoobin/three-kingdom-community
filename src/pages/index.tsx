@@ -39,6 +39,16 @@ export default function Home() {
                   </Link>
                 </Text>
               </Box>
+
+              {/* only development*/}
+              {process.env.NODE_ENV === "development"
+              && <Box py={1}>
+                <Text variant={"h5"}>
+                  <Link href={"put/data"}>
+                    데이터 추가, 수정
+                  </Link>
+                </Text>
+              </Box>}
             </Box>
           </main>
         </Box>

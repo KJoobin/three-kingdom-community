@@ -3,16 +3,19 @@ import React, { useEffect, useRef, useState } from "react";
 import { Box, PointerCard } from "@component/atoms";
 import { WarlordCardClose } from "@component/molecules/warlord-card-close";
 import { WarlordCardOpen } from "@component/molecules/warlord-card-open";
+import { WarlordCardOpenFix } from "@component/molecules/warlord-card-open-fix";
 import { Warlord } from "@pages/search/skill";
 
 const ANIMATION_DURATION = 1;
 
 export type WarlordCardProps = {
   warlord: Warlord;
+  fixable?:boolean;
 }
 
 export const WarlordCard:React.FunctionComponent<WarlordCardProps> = ({
   warlord,
+  fixable,
 }) => {
   const [expand, setExpand] = useState(false);
   const [renderOpen, setRenderOpen] = useState(false);
@@ -40,7 +43,7 @@ export const WarlordCard:React.FunctionComponent<WarlordCardProps> = ({
     <PointerCard style={{ backgroundColor: "white" }}>
       <Box style={{ padding: 8, transition: `max-height ${ANIMATION_DURATION}s ease-in-out`, maxHeight: expand ? 1000 : 150 }} bgcolor={"white"}>
         {renderOpen
-          ? <WarlordCardOpen warlord={warlord} onClick={() => setExpand(prev => !prev)} />
+          ? (fixable ? <WarlordCardOpenFix warlord={warlord} onClick={() => setExpand(prev => !prev)} /> : <WarlordCardOpen warlord={warlord} onClick={() => setExpand(prev => !prev)} />)
           : <WarlordCardClose warlord={warlord} onClick={() => setExpand(prev => !prev)} />
         }
       </Box>
