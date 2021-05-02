@@ -103,6 +103,7 @@ export default function SearchWarlords() {
         <desc>장수 검색, 전법 검색, 장수 스킬 검색 기능</desc>
         <meta itemProp="name" content="삼국지 전략판 장수, 스킬, 전법스킬 검색"/>
         <meta itemProp="description" content="장수 검색, 전법 검색, 장수 스킬 검색 기능"/>
+        <script data-ad-client="ca-pub-3235703528769525" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
       </Head>
       <Container>
         <Box>

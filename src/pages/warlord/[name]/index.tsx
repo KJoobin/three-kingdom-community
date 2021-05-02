@@ -35,6 +35,7 @@ export default function WarlordDetail() {
         <title>모바일 삼국지 전략판 유틸 기능</title>
         <meta itemProp="name" content="삼국지 전략판 장수 디테일"/>
         <meta itemProp="description" content="장수의 스킬, 전법스킬 디테일 검색"/>
+        <script data-ad-client="ca-pub-3235703528769525" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
         <desc>장수의 스킬, 전법스킬 디테일 검색</desc>
       </Head>
       <Container>
