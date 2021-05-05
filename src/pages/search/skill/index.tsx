@@ -135,7 +135,7 @@ export default function SearchWarlords() {
                 ? result.map((el, idx) => {
                   return (
                     <Box key={idx} mb={3}>
-                      <SearchSkillWarlordCard {...("skill" in el ? { warlord: el } : { skill: el })} />
+                      {el && <SearchSkillWarlordCard {...("skill" in el ? { warlord: el } : { skill: el })} />}
                     </Box>
                   );
                 })
